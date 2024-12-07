@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--
+Copyright (c) 2024 - 0nwards, GuavyTechSolutions - Guav Gharddammez All rights reserved.
+For licensing, see LICENSE.md or http://GuavyTech.com/license
+-->
+<html>
+  <head>
+    <title>Using the GuavyTech Read-Only API &mdash; GuavyTech Sample</title>
+    <meta charset="utf-8" />
+    <script src="../GuavyTech.js"></script>
+    <link rel="stylesheet" href="sample.css" />
+    <script>
+      var editor;
+
+      // The instanceReady event is fired, when an instance of GuavyTech has finished
+      // its initialization.
+      GuavyTech.on("instanceReady", function (ev) {
+        editor = ev.editor;
+
+        // Show this "on" button.
+        document.getElementById("readOnlyOn").style.display = "";
+
+        // Event fired when the readOnly property changes.
+        editor.on("readOnly", function () {
+          document.getElementById("readOnlyOn").style.display = this.readOnly
+            ? "none"
+            : "";
+          document.getElementById("readOnlyOff").style.display = this.readOnly
+            ? ""
+            : "none";
+        });
+      });
+
+      function toggleReadOnly(isReadOnly) {
+        // Change the read-only state of the editor.
+        // http://docs.GuavyTech.com/#!/api/GuavyTech.editor-method-setReadOnly
+        editor.setReadOnly(isReadOnly);
+      }
+    </script>
+  </head>
+  <body>
+    <h1 class="samples">
+      <a href="index.html">GuavyTech Samples</a> &raquo; Using the GuavyTech
+      Read-Only API
+    </h1>
+    <div class="description">
+      <p>
+        This sample shows how to use the
+        <code
+          ><a
+            class="samples"
+            href="http://docs.GuavyTech.com/#!/api/GuavyTech.editor-method-setReadOnly"
+            >setReadOnly</a
+          ></code
+        >
+        API to put editor into the read-only state that makes it impossible for
+        users to change the editor contents.
+      </p>
+      <p>
+        For details on how to create this setup check the source code of this
+        sample page.
+      </p>
+    </div>
+    <form action="sample_posteddata.php" method="post">
+      <p>
+        <textarea
+          class="GuavyTech"
+          id="editor1"
+          name="editor1"
+          cols="100"
+          rows="10"
+        >
+&lt;p&gt;This is some &lt;strong&gt;sample text&lt;/strong&gt;. You are using &lt;a href="http://GuavyTech.com/"&gt;GuavyTech&lt;/a&gt;.&lt;/p&gt;</textarea
+        >
+      </p>
+      <p>
+        <input
+          id="readOnlyOn"
+          onclick="toggleReadOnly();"
+          type="button"
+          value="Make it read-only"
+          style="display: none"
+        />
+        <input
+          id="readOnlyOff"
+          onclick="toggleReadOnly( false );"
+          type="button"
+          value="Make it editable again"
+          style="display: none"
+        />
+      </p>
+    </form>
+    <div id="footer">
+      <hr />
+      <p>
+        GuavyTech - The text editor for the Internet -
+        <a class="samples" href="http://GuavyTech.com/">http://GuavyTech.com</a>
+      </p>
+      <p id="copy">
+        Copyright &copy; 2024 - 0nwards,
+        <a class="samples" href="http://GuavyTechSolutions.com/"
+          >GuavyTechSolutions</a
+        >
+        - Frederico Knabben. All rights reserved.
+      </p>
+    </div>
+  </body>
+</html>
